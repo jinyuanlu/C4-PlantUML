@@ -14,7 +14,7 @@ System_Ext(Client, "Client", "Generate client event log.")
 System_Ext(SLS, "SLS", "Ali log service")
 
 System_Boundary(c1, "DataPipeline") {
-    Container(Kafka, "Kafka", "Middleware", "Distributed log service")
+    ContainerQueue(Kafka, "Kafka", "Middleware", "Distributed log service")
     Container(Debezium, "Debezium", "Kafka Connector", "Used to sync binlog")
     Container(HdfsSinker, "HdfsSinker", "Kafka Connector", "Used to sink to hive")
     Container(KafkaSchemaRegistry, "Kafka SchemaRegistry", "Middleware", "Check schema of every topic")
