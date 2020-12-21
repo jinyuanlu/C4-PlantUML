@@ -13,12 +13,12 @@ System_Ext(Business, "Business Server Backend", "PHP Backend")
 System_Ext(Client, "Client", "Generate client event log.")
 System_Ext(SLS, "SLS", "Ali log service")
 
-System_Boundary(c1, "DataPipleline") {
+System_Boundary(c1, "DataPipeline") {
     Container(Kafka, "Kafka", "Middleware", "Distributed log service")
     Container(Debezium, "Debezium", "Kafka Connector", "Used to sync binlog")
     Container(HdfsSinker, "HdfsSinker", "Kafka Connector", "Used to sink to hive")
     Container(KafkaSchemaRegistry, "Kafka SchemaRegistry", "Middleware", "Check schema of every topic")
-    Container(Spark, "Spark App", "Python", "T+1 aggregator")
+    Container(BatchSpark, "Batch Spark App", "Python", "T+1 aggregator")
     ContainerDb(Kylin, "Kylin", "Pre-aggregation Engine, ADS", "Store metrics")
     ContainerDb(Hive, "Hive", "Distributed Database, ODS", "Store raw ODS")
 }
@@ -34,8 +34,8 @@ Rel(DMP, Debezium, "Sync DSP data")
 Rel(Kafka, HdfsSinker, "Sink client event log")
 Rel(HdfsSinker, Hive, "Sink client event log")
 Rel(HdfsSinker, Hive, "Sink mysql binlog")
-Rel_Back(Spark, Hive, "Source ODS, inner join imap||idfa on token, aggregate metrics.")
-Rel(Spark, Hive, "Sink")
+Rel_Back(BatchSpark, Hive, "Source ODS, inner join imap||idfa on token, aggregate metrics.")
+Rel(BatchSpark, Hive, "Sink")
 
 Rel_Back(Kylin, Hive, "Modeling cube")
 Rel(DMP, Kylin, "Query data")
@@ -43,4 +43,4 @@ Rel(DMP, Kylin, "Query data")
 #+END_SRC
 
 #+RESULTS: 
-[[file:../img/ad_dmp_component.png]]
+[[file:../img/ad_dmp_dp_component.png]]
