@@ -1,0 +1,49 @@
+#+BEGIN_SRC plantuml :file ../img/ad_dmp_component.png
+@startuml
+!include ../style/C4_Container.puml
+' LAYOUT_TOP_DOWN()
+' LAYOUT_AS_SKETCH()
+LAYOUT_WITH_LEGEND()
+
+LAYOUT_WITH_LEGEND()
+'LAYOUT_AS_SKETCH()
+
+title System Container diagram for HBAD System
+
+Person(Operator, "Operator", "Manage account & ad plan")
+System_Ext(DMP, "self-DMP", "PHP Backend")
+System_Ext(Business, "Business Server Backend", "PHP Backend")
+System_Ext(Client, "Client", "Generate client event log.")
+System_Ext(SLS, "SLS", "Ali log service")
+
+System_Boundary(c1, "DataPipleline") {
+    Container(Kafka, "Kafka", "Middleware", "Distributed log service")
+    Container(Debezium, "Debezium", "Kafka Connector", "Used to sync binlog")
+    Container(HdfsSinker, "HdfsSinker", "Kafka Connector", "Used to sink to hive")
+    Container(KafkaSchemaRegistry, "Kafka SchemaRegistry", "Middleware", "Check schema of every topic")
+    Container(Spark, "Spark App", "Python", "T+1 aggregator")
+    ContainerDb(Kylin, "Kylin", "Pre-aggregation Engine, ADS", "Store metrics")
+    ContainerDb(Hive, "Hive", "Distributed Database, ODS", "Store raw ODS")
+}
+
+Rel(Operator, DMP, "Uses")
+Rel(Client, SLS, "event log")
+Rel(SLS, Kafka, "Pull event log")
+Rel(Business, Debezium, "Sync binlog")
+Rel(Debezium, Kafka, "Sync binlog")
+Rel_Neighbor(Kafka, KafkaSchemaRegistry, "Check Schema")
+Rel_Back_Neighbor(Kafka, KafkaSchemaRegistry , "Schema revolution")
+Rel(DMP, Debezium, "Sync DSP data")
+Rel(Kafka, HdfsSinker, "Sink client event log")
+Rel(HdfsSinker, Hive, "Sink client event log")
+Rel(HdfsSinker, Hive, "Sink mysql binlog")
+Rel_Back(Spark, Hive, "Source ODS, inner join imap||idfa on token, aggregate metrics.")
+Rel(Spark, Hive, "Sink")
+
+Rel_Back(Kylin, Hive, "Modeling cube")
+Rel(DMP, Kylin, "Query data")
+
+#+END_SRC
+
+#+RESULTS: 
+[[file:../img/ad_dmp_component.png]]
