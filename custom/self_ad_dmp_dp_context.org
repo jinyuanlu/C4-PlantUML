@@ -1,6 +1,6 @@
 #+TITLE: Advertisement Data Management Platform
 
-#+BEGIN_SRC plantuml
+#+BEGIN_SRC plantuml :file ../img/ad_dmp_dp_context.png
 !include ../style/c4_context.puml
 
 LAYOUT_WITH_LEGEND()
@@ -13,7 +13,7 @@ System(DataPipeline, "DataPipeline", "inner join imap||idfa on token, aggregate 
 System_Ext(DMP, "self-DMP", "PHP Backend")
 System_Ext(Business, "Business Server Backend", "PHP Backend")
 System_Ext(Client, "Client", "Generate client event log.")
-System_ExtDB(SLS, "SLS", "Ali log service")
+System_Ext(SLS, "SLS", "Ali log service")
 
 Rel(Operator, DMP, "Uses")
 Rel(Client, SLS, "event log")
@@ -25,4 +25,4 @@ Rel(DMP, DataPipeline, "Query data")
 #+end_src
 
 #+RESULTS:
-[[file:/var/folders/bj/c86wng3s1f9d9zkl91ghsnkc0000gn/T/babel-Uu9W9p/plantuml-qVOeTQ.png]]
+[[file:/var/folders/bj/c86wng3s1f9d9zkl91ghsnkc0000gn/T/babel-Uu9W9p/plantuml-4dxCWM.png]]
