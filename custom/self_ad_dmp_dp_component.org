@@ -5,10 +5,7 @@
 ' LAYOUT_AS_SKETCH()
 LAYOUT_WITH_LEGEND()
 
-LAYOUT_WITH_LEGEND()
-'LAYOUT_AS_SKETCH()
-
-title System Container diagram for HBAD System
+title System Container diagram for self-DMP System
 
 Person(Operator, "Operator", "Manage account & ad plan")
 System_Ext(DMP, "self-DMP", "PHP Backend")

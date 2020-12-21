@@ -6,14 +6,14 @@
 LAYOUT_WITH_LEGEND()
 'LAYOUT_AS_SKETCH()
 
-title System Context diagram for HBAD System
+title System Context diagram for self-DMP System
 
 Person(Operator, "Operator", "Manage account & ad plan")
 System(DataPipeline, "DataPipeline", "inner join imap||idfa on token, aggregate metrics.")
 System_Ext(DMP, "self-DMP", "PHP Backend")
 System_Ext(Business, "Business Server Backend", "PHP Backend")
 System_Ext(Client, "Client", "Generate client event log.")
-System_Ext(SLS, "SLS", "Ali log service")
+System_ExtDB(SLS, "SLS", "Ali log service")
 
 Rel(Operator, DMP, "Uses")
 Rel(Client, SLS, "event log")
@@ -25,4 +25,4 @@ Rel(DMP, DataPipeline, "Query data")
 #+end_src
 
 #+RESULTS:
-[[file:/var/folders/bj/c86wng3s1f9d9zkl91ghsnkc0000gn/T/babel-Uu9W9p/plantuml-WIOGez.png]]
+[[file:/var/folders/bj/c86wng3s1f9d9zkl91ghsnkc0000gn/T/babel-Uu9W9p/plantuml-qVOeTQ.png]]
