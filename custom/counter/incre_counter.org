@@ -1,4 +1,4 @@
-#+BEGIN_SRC plantuml :file incre_counter.png
+#+BEGIN_SRC plantuml :file ../img/incre_counter.png
 @startuml
 (*) --> event
 if "key exists in redis" then
