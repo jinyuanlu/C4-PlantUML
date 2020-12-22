@@ -40,7 +40,7 @@ Rel_Back(BatchSpark, Hive, "Source ODS, inner join imap||idfa on token, aggregat
 Rel(BatchSpark, Hive, "Sink")
 
 Rel_Back(Kylin, Hive, "Modeling cube")
-Rel(DMP, Kylin, "Query data")
+Rel(DMP, Kylin, "Query data", "HTTP")
 
 #+END_SRC
 
