@@ -1,0 +1,17 @@
+#+BEGIN_SRC plantuml :file incre_counter.png
+@startuml
+(*) --> event
+if "key exists in redis" then
+        -->[true] "redis incre 1 & set expire"
+else
+        -->[false] "query hbase"
+        --> "generate cache in redis"
+end if
+        --> "redis incre 1 & set expire"
+        --> "hbase incre 1"
+        -down-> [Ending process] (*)
+@enduml
+#+END_SRC
+
+#+RESULTS:
+[[file:incre_counter.png]]
