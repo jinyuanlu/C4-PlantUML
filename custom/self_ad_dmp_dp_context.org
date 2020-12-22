@@ -11,12 +11,14 @@ title System Context diagram for self-DMP System
 Person(Operator, "Operator", "Manage account & ad plan")
 System(DataPipeline, "DataPipeline", "inner join imap||idfa on token, aggregate metrics.")
 System_Ext(DMP, "self-DMP", "PHP Backend")
+System_Ext(DSP, "DSP", "Third-party DSP")
 System_Ext(Business, "Business Server Backend", "PHP Backend")
 System_Ext(Client, "Client", "Generate client event log.")
 System_Ext(SLS, "SLS", "Ali log service")
 
 Rel(Operator, DMP, "Uses")
 Rel(Client, SLS, "event log")
+Rel(DSP, DMP, "callback")
 Rel(SLS, DataPipeline, "Pull event log")
 Rel(Business, DataPipeline, "Sync binlog")
 Rel(DMP, DataPipeline, "Sync DSP data")
@@ -25,4 +27,4 @@ Rel(DMP, DataPipeline, "Query data")
 #+end_src
 
 #+RESULTS:
-[[file:/var/folders/bj/c86wng3s1f9d9zkl91ghsnkc0000gn/T/babel-Uu9W9p/plantuml-4dxCWM.png]]
+[[file:../img/ad_dmp_dp_context.png]]

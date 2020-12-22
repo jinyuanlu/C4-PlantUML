@@ -12,6 +12,7 @@ System_Ext(DMP, "self-DMP", "PHP Backend")
 System_Ext(Business, "Business Server Backend", "PHP Backend")
 System_Ext(Client, "Client", "Generate client event log.")
 System_Ext(SLS, "SLS", "Ali log service")
+System_Ext(DSP, "DSP", "Third-party DSP")
 
 System_Boundary(c1, "DataPipeline") {
     ContainerQueue(Kafka, "Kafka", "Middleware", "Distributed log service")
@@ -23,6 +24,7 @@ System_Boundary(c1, "DataPipeline") {
     ContainerDb(Hive, "Hive", "Distributed Database, ODS", "Store raw ODS")
 }
 
+Rel(DSP, DMP, "callback")
 Rel(Operator, DMP, "Uses")
 Rel(Client, SLS, "event log")
 Rel(SLS, Kafka, "Pull event log")
