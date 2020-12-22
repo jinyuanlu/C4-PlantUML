@@ -1,4 +1,4 @@
-#+BEGIN_SRC plantuml :file ../img/ad_dmp_dp_component.png
+#+BEGIN_SRC plantuml :file ../../img/ad_dmp_dp_component.png
 @startuml
 !include ../style/C4_Container.puml
 ' LAYOUT_TOP_DOWN()
