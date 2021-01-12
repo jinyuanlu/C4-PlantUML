@@ -1,0 +1,24 @@
+#+BEGIN_SRC plantuml :file ../../img/superset_viz.png
+'verson: 0.37.2
+core.explore_json -> utils.get_viz: datasource_type/form_data/...
+utils.get_viz -> connectors.ConnectorRegistry.get_datasource
+connector.ConnectorRegistry.get_datasource -> utils.get_viz: DataSource obj
+utils.get_viz -> core.explore_json: viz_obj
+core.explore_json -> core.generate_json
+core.generate_json -> core.get_raw_result
+core.get_raw_result -> viz.get_df_payload
+viz.get_df_payload -> viz.get_df
+viz.get_df -> query_obj
+query_obj -> viz.get_df: query_obj
+viz.get_df -> viz.datasource.query
+viz.datasource.query -> viz.get_df: result
+viz.get_df -> viz.get_df_payload: DataFrame
+viz.get_df_payload -> core.get_raw_result: Dict[str, Any]
+core.get_raw_result -> core.generate_json: FlaskResponse
+core.generate_json -> core.explore_json: FlaskResponse
+
+
+#+END_SRC
+
+#+RESULTS:
+[[file:../../img/superset_viz.png]]
