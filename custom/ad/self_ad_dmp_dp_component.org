@@ -1,6 +1,6 @@
 #+BEGIN_SRC plantuml :file ../../img/ad_dmp_dp_component.png
 @startuml
-!include ../style/C4_Container.puml
+!include ../../style/C4_Container.puml
 ' LAYOUT_TOP_DOWN()
 ' LAYOUT_AS_SKETCH()
 LAYOUT_WITH_LEGEND()
@@ -45,4 +45,4 @@ Rel(DMP, Kylin, "Query data", "HTTP")
 #+END_SRC
 
 #+RESULTS: 
-[[file:../img/ad_dmp_dp_component.png]]
+[[file:../../img/ad_dmp_dp_component.png]]

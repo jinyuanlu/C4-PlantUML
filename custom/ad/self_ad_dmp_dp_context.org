@@ -1,7 +1,7 @@
 #+TITLE: Advertisement Data Management Platform
 
 #+BEGIN_SRC plantuml :file ../../img/ad_dmp_dp_context.png
-!include ../style/c4_context.puml
+!include ../../style/c4_context.puml
 
 LAYOUT_WITH_LEGEND()
 'LAYOUT_AS_SKETCH()
